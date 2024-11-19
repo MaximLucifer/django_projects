@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Стандартный Заголовок{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Добро пожаловать на наш сайт</h1>
+    </header>
+    <main>
+        {% block content %}
+
+        {% include 'user_greeting.html' %}
+        
+        <p>Это стандартное содержимое страницы.</p>
+        {% include "child.html" %}
+
+        <p>Далее идёт список и таблица:</p>
+
+        <div>
+            <a href="{% url 'class_list' %}">
+                <button style="padding: 10px 20px; margin-right: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+                    Перейти к списку
+                </button>
+            </a>
+            <a href="{% url 'currency_table' %}">
+                <button style="padding: 10px 20px; background-color: #008CBA; color: white; border: none; cursor: pointer;">
+                    Перейти к таблице
+                </button>
+            </a>
+        </div>
+
+        {% endblock %}
+    </main>
+    <footer>
+        {% block footer %}
+        <p>Стандартный футер</p>
+        {% endblock %}
+    </footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>My To Do List</h1>  
+        <form action="/addTodoItem/" method = "post">{% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" value="Add Todo Item">
+        </form>
+        <div>
+            <ul>
+                {% for i in all_items %} 
+                <li>{{i.content}}
+                    <form action="/deleteTodoItem/{{i.id}}/" method = "post">{% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>  
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>

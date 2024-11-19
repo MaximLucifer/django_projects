@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Обновление профиля{% endblock %}
+
+{% block content %}
+<h2>Обновление даты рождения</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+<a href="{% url 'profile' %}">Назад в профиль</a>
+{% endblock %}

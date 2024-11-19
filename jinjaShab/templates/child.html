@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+
+{% block title %}Пользовательская страница{% endblock %}
+
+{% block content %}
+    <p>Это содержимое дополнительного шаблона.</p>
+    {% include "paragraph.html" %}
+{% endblock %}
+
+{% block footer %}
+    <p>Пользовательская информация в футере</p>
+{% endblock %}

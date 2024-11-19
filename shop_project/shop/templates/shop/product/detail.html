@@ -1,0 +1,9 @@
+<h1>{{ product.name }} </h1>
+<p> {{ product.description}} </p>
+<p>Price: ${{ product.price }} </p>
+<p>Stock: {{ product.stock }} </p>
+
+<form action="{% url 'cart_add' product.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Add to cart">
+</form>
