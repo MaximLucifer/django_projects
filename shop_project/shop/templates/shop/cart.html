@@ -4,6 +4,7 @@
 
 {% block content %}
 <h1>Your Shopping Cart</h1>
+<a href="{% url 'product_list' %}">Product List</a>
 
 {% if cart.items %}
     <table>

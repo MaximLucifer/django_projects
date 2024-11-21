@@ -1,5 +1,5 @@
 """
-URL configuration for jinjaShab project.
+URL configuration for djangorest project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -14,14 +14,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url, include
 from django.contrib import admin
-from django.urls import path
-from tasks.views import class_list, currency_table
-from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('class-list/', class_list, name='class_list'),
-    path('currency-table/', currency_table, name='currency_table'),
-    path('', TemplateView.as_view(template_name='home.html'))
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include('todolist.urls')),
 ]
