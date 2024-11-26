@@ -23,5 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('class-list/', class_list, name='class_list'),
     path('currency-table/', currency_table, name='currency_table'),
-    path('home/', TemplateView.as_view(template_name='home.html'))
+    path('', TemplateView.as_view(template_name='home.html'))
 ]
