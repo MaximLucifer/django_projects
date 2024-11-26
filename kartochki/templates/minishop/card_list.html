@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <title>Карточки</title>
+    <style>
+        .card {
+            height: 100%; /* Одинаковая высота всех карточек */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Распределение элементов внутри карточки */
+        }
+
+        img {
+            object-fit: cover; /* Адаптация изображения */
+            height: 150px; /* Фиксированная высота для всех изображений */
+            width: 100%; /* Растянуть на всю ширину карточки */
+        }
+
+        .row {
+            margin-bottom: 20px; /* Расстояние между строками карточек */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        {% for card in cards %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ card.image.url }}" alt="{{ card.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ card.title }}</h5>
+                    <p class="card-text">{{ card.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Стоимость:</strong> {{ card.price }} руб.</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary disabled mt-auto">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

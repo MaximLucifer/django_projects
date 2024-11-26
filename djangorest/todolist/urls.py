@@ -1,10 +1,13 @@
-from django.conf.urls import url, include
-from rest_framework.urlpatterns import format_suffix_patterns
-from .views import TaskCreateView, TaskDetailsView
+from django.urls import path
+from .views import (
+    TagListCreateView, TasklistCreateView, TasklistDetailsView,
+    TaskCreateView, TaskDetailsView
+)
 
-urlpatterns = {
-    url(r'^todolists/$', TaskCreateView.as_view(), name="create"),
-    url(r'^todolists/(?P<pk>[0-9]+)/$', TaskDetailsView.as_view(), name="detail"),
-}
-
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = [
+    path('tags/', TagListCreateView.as_view(), name='tags'),
+    path('', TasklistCreateView.as_view(), name='tasklists'),
+    path('todolists/<int:pk>/', TasklistDetailsView.as_view(), name='tasklist-detail'),
+    path('todolists/<int:list_id>/tasks/', TaskCreateView.as_view(), name='tasks'),
+    path('todolists/<int:list_id>/tasks/<int:pk>/', TaskDetailsView.as_view(), name='task-detail'),
+]

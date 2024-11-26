@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <title>Карточки товаров</title>
+    <style>
+        .card {
+            height: 100%; /* Одинаковая высота всех карточек */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Распределение элементов внутри карточки */
+        }
+
+        img {
+            object-fit: cover; /* Адаптация изображения */
+            height: 150px; /* Фиксированная высота для всех изображений */
+            width: 100%; /* Растянуть на всю ширину карточки */
+        }
+
+        .row {
+            margin-bottom: 20px; /* Расстояние между строками карточек */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Список товаров</h1>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid">
+                {% else %}
+                    <img src="{% static 'images/default.jpg' %}" alt="Изображение отсутствует" class="img-fluid"> <!-- Замените на ваш путь к изображению по умолчанию -->
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Стоимость:</strong> {{ product.price }} руб.</li>
+                        {% if product.brand %}
+                            <li><strong>Бренд:</strong> {{ product.brand }}</li>
+                        {% endif %}
+                        {% if product.material %}
+                            <li><strong>Материал:</strong> {{ product.material }}</li>
+                        {% endif %}
+                        {% if product.size %}
+                            <li><strong>Размер:</strong> {{ product.size }}</li>
+                        {% endif %}
+                    </ul>
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary mt-auto">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

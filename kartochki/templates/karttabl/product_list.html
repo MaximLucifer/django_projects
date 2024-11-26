@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <title>Карточки</title>
+    <style>
+        .card {
+            height: 100%; /* Одинаковая высота всех карточек */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Распределение элементов внутри карточки */
+        }
+
+        img {
+            object-fit: cover; /* Адаптация изображения */
+            height: 150px; /* Фиксированная высота для всех изображений */
+            width: 100%; /* Растянуть на всю ширину карточки */
+        }
+
+        .row {
+            margin-bottom: 20px; /* Расстояние между строками карточек */
+        }
+        
+        h2 {
+            margin-top: 40px; /* Отступ сверху для заголовков категорий */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    
+    <h2>Одежда</h2>
+    <div class="row">
+        {% for cloth in clothes %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ cloth.image.url }}" alt="{{ cloth.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cloth.title }}</h5>
+                    <p class="card-text">{{ cloth.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Цвет: </strong>{{ cloth.color }}</li>
+                        <li><strong>Размеры: </strong>{{ cloth.size }}</li>
+                        <li><strong>Материал: </strong>{{ cloth.material }}</li>
+                        <li><strong>Стоимость:</strong> {{ cloth.price }} руб.</li>
+                    </ul>
+                    <a href="{{ cloth.detail_page_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Электроника</h2>
+    <div class="row">
+        {% for electronic in electronics %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ electronic.image.url }}" alt="{{ electronic.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ electronic.title }}</h5>
+                    <p class="card-text">{{ electronic.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Бренд: </strong>{{ electronic.brand }}</li>
+                        <li><strong>Модель: </strong>{{ electronic.model_number }}</li>
+                        <li><strong>Характеристики: </strong>{{ electronic.specification }}</li>
+                        <li><strong>Стоимость:</strong> {{ electronic.price }} руб.</li>
+                    </ul>
+                    <a href="{{ electronic.detail_page_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Автомобили</h2>
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ car.image.url }}" alt="{{ car.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.title }}</h5>
+                    <p class="card-text">{{ car.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Бренд: </strong>{{ car.brand }}</li>
+                        <li><strong>Год модели: </strong>{{ car.model_year }}</li>
+                        <li><strong>Цвет: </strong>{{ car.color }}</li>
+                        <li><strong>Стоимость:</strong> {{ car.price }} руб.</li>
+                    </ul>
+                    <a href="{{ car.detail_page_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Украшения</h2>
+    <div class="row">
+        {% for jewel in jewelry %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ jewel.image.url }}" alt="{{ jewel.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ jewel.title }}</h5>
+                    <p class="card-text">{{ jewel.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Материал: </strong>{{ jewel.material}}</li>
+                        <li><strong>Тип камня: </strong>{{ jewel.gemstone_type}}</li>
+                        <li><strong>Стоимость:</strong> {{ jewel.price }} руб.</li>
+                    </ul>
+                    <a href="{{ jewel.detail_page_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2>Бытовая техника</h2>
+    <div class="row">
+        {% for appliance in home_appliances %}
+        <div class="col-md-3 d-flex justify-content-center mb-4">
+            <div class="card">
+                <img src="{{ appliance.image.url }}" alt="{{ appliance.title }}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">{{ appliance.title }}</h5>
+                    <p class="card-text">{{ appliance.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Бренд: </strong>{{ appliance.brand}}</li>
+                        <li><strong>Номер модели: </strong>{{ appliance.model_number}}</li>
+                        <li><strong>Характеристики: </strong>{{ appliance.specification}}</li>
+                        <li><strong>Стоимость:</strong> {{ appliance.price }} руб.</li>
+                    </ul>
+                    <a href="{{ appliance.detail_page_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
