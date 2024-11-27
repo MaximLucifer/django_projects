@@ -35,8 +35,8 @@
         {% for product in products %}
         <div class="col-md-3 d-flex justify-content-center mb-4">
             <div class="card">
-                {% if product.image_url %}
-                    <img src="{{ product.image_url }}" alt="{{ product.name }}" class="img-fluid">
+                {% if product.image.url %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
                 {% else %}
                     <img src="{% static 'images/default.jpg' %}" alt="Изображение отсутствует" class="img-fluid"> <!-- Замените на ваш путь к изображению по умолчанию -->
                 {% endif %}
@@ -54,8 +54,35 @@
                         {% if product.size %}
                             <li><strong>Размер:</strong> {{ product.size }}</li>
                         {% endif %}
+                        {% if product.model_number %}
+                            <li><strong>Модель:</strong> {{ product.model_number }}</li>
+                        {% endif %}
+                        {% if product.warranty_period %}
+                            <li><strong>Гарантия:</strong> {{ product.warranty_period }}</li>
+                        {% endif %}
+                        {% if product.model_year %}
+                            <li><strong>Год выпуска:</strong> {{ product.model_year }}</li>
+                        {% endif %}
+                        {% if product.engine_type %}
+                            <li><strong>Тип двигателя:</strong> {{ product.engine_type }}</li>
+                        {% endif %}
+                        {% if product.mileage %}
+                            <li><strong>Пробег:</strong> {{ product.mileage }}</li>
+                        {% endif %}
+                        {% if product.weight %}
+                            <li><strong>Вес:</strong> {{ product.weight }}</li>
+                        {% endif %}
+                        {% if product.gemstone_type %}
+                            <li><strong>Тип камня:</strong> {{ product.gemstone_type }}</li>
+                        {% endif %}
+                        {% if product.energy_class %}
+                            <li><strong>Класс энергоэффективности:</strong> {{ product.energy_class }}</li>
+                        {% endif %}
+                        {% if product.dimensions %}
+                            <li><strong>Размеры:</strong> {{ product.dimensions }}</li>
+                        {% endif %}
                     </ul>
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary mt-auto">Подробнее</a>
+                    <a href='' class="btn btn-primary mt-auto">Подробнее</a>
                 </div>
             </div>
         </div>

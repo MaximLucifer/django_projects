@@ -46,7 +46,7 @@
                     <p class="card-text">{{ cloth.description }}</p>
                     <ul class="list-unstyled">
                         <li><strong>Цвет: </strong>{{ cloth.color }}</li>
-                        <li><strong>Размеры: </strong>{{ cloth.size }}</li>
+                        <li><strong>Размеры: </strong>{{ cloth.sizes }}</li>
                         <li><strong>Материал: </strong>{{ cloth.material }}</li>
                         <li><strong>Стоимость:</strong> {{ cloth.price }} руб.</li>
                     </ul>
@@ -69,7 +69,7 @@
                     <ul class="list-unstyled">
                         <li><strong>Бренд: </strong>{{ electronic.brand }}</li>
                         <li><strong>Модель: </strong>{{ electronic.model_number }}</li>
-                        <li><strong>Характеристики: </strong>{{ electronic.specification }}</li>
+                        <li><strong>Характеристики: </strong>{{ electronic.specifications }}</li>
                         <li><strong>Стоимость:</strong> {{ electronic.price }} руб.</li>
                     </ul>
                     <a href="{{ electronic.detail_page_url }}" class="btn btn-primary">Подробнее</a>
@@ -134,7 +134,7 @@
                     <ul class="list-unstyled">
                         <li><strong>Бренд: </strong>{{ appliance.brand}}</li>
                         <li><strong>Номер модели: </strong>{{ appliance.model_number}}</li>
-                        <li><strong>Характеристики: </strong>{{ appliance.specification}}</li>
+                        <li><strong>Характеристики: </strong>{{ appliance.specifications }}</li>
                         <li><strong>Стоимость:</strong> {{ appliance.price }} руб.</li>
                     </ul>
                     <a href="{{ appliance.detail_page_url }}" class="btn btn-primary">Подробнее</a>
