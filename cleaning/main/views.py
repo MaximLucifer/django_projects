@@ -18,7 +18,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegistrationForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'form': form}) # фильтровать скрипты чтобы ничего не было из кода
 
 def booking(request):
     if not request.user.is_authenticated:
@@ -26,7 +26,7 @@ def booking(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            # Save booking to DB
+            
             return redirect('home')
     else:
         form = BookingForm()

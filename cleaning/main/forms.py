@@ -11,7 +11,7 @@ class UserRegistrationForm(forms.ModelForm):
     agreement = forms.BooleanField(
         required=True,
         label="Согласие на обработку персональных данных"
-    )
+    ) # фильтровать скрипты
 
     class Meta:
         model = User
