@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заявки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea, select, button {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .links {
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .links a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <a href="{% url 'home' %}">Главная страница</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">Профиль</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </div>
+        <h1>Оформление заявки</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="date">Дата уборки</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Время уборки</label>
+            <input type="time" id="time" name="time" required>
+
+            <label for="address">Адрес</label>
+            <input type="text" id="address" name="address" maxlength="100" required placeholder="Введите адрес">
+
+            <label for="comment">Комментарий</label>
+            <textarea id="comment" name="comment" rows="3" placeholder="Введите комментарий (необязательно)"></textarea>
+
+            <button type="submit">Отправить заявку</button>
+        </form>
+        <div class="links">
+            <a href="{% url 'profile' %}">Вернуться в профиль</a>
+        </div>
+    </div>
+</body>
+</html>
