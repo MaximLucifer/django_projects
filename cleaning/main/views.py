@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import UserRegistrationForm, BookingForm
 from django.contrib.auth.decorators import login_required
+from .models import Booking
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 @login_required
 def profile(request):
@@ -26,7 +31,10 @@ def booking(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            
+            booking = form.save(commit=False)
+            # Устанавливаем пользователя напрямую через user_id
+            booking.user_id = request.user.id
+            booking.save()
             return redirect('home')
     else:
         form = BookingForm()

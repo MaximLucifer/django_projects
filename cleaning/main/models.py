@@ -1,3 +1,4 @@
+import bleach
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
@@ -27,3 +28,21 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
+
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    address = models.CharField(max_length=100)
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        # Фильтруем данные перед сохранением
+        self.address = bleach.clean(self.address, tags=[], attributes={})
+        if self.comment:
+            self.comment = bleach.clean(self.comment, tags=[], attributes={})
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Booking by {self.user.username} on {self.date} at {self.time}"

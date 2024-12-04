@@ -75,11 +75,25 @@
             {% endif %}
         </div>
         <h1>Регистрация</h1>
-        <form method="post">
+        <form method="post" autocomplete="off">
             {% csrf_token %}
-            {{ form.as_p }}
+            <label for="username">Логин</label>
+            <input type="text" name="username" maxlength="30" pattern="[a-zA-Z0-9_]+" title="Разрешены только буквы, цифры и _" required>
+        
+            <label for="first_name">Имя</label>
+            <input type="text" name="first_name" maxlength="20" pattern="[А-Яа-яA-Za-z-]+" title="Имя может содержать только буквы и дефис" required>
+        
+            <label for="last_name">Фамилия</label>
+            <input type="text" name="last_name" maxlength="20" pattern="[А-Яа-яA-Za-z-]+" title="Фамилия может содержать только буквы и дефис" required>
+        
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+        
+            <label for="password">Пароль</label>
+            <input type="password" name="password" minlength="8" required>
+        
             <button type="submit">Зарегистрироваться</button>
-        </form>
+        </form>        
     </div>
 </body>
 </html>
