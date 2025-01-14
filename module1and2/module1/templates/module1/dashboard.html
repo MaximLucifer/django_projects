@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Формирование заявки — Модуль 1{% endblock %}
+
+{% block content %}
+<h1>Ваши заявки</h1>
+<ul>
+    {% for req in requests %}
+        <li>{{ req.address }} - {{ req.get_service_type_display }}</li>
+    {% endfor %}
+</ul>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить заявку</button>
+</form>
+{% endblock %}
