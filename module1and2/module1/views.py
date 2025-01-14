@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, RequestForm
 from .models import CleaningRequest
@@ -9,8 +9,9 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            next_page = request.GET.get('next', '/module1/dashboard/')  # если next не указан, перенаправим на default
+            user.backend = 'module1.auth_backend.Module1AuthBackend'
+            login(request, user, backend='module1.auth_backend.Module1AuthBackend')
+            next_page = request.GET.get('next', 'module1:module1_dashboard/')  # если next не указан, перенаправим на default
             return redirect(next_page)
     else:
         form = RegistrationForm()
@@ -25,13 +26,18 @@ def login_view(request):
         # Попробуем аутентифицировать через оба бэкенда
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            login(request, user, backend='module1.auth_backend.Module1AuthBackend')
             login(request, user)
-            next_page = request.GET.get('next', '/module1/dashboard/')
+            next_page = request.GET.get('next', 'module1:module1_dashboard/')
             return redirect(next_page)
         else:
             error_message = "Неверный логин или пароль. Попробуйте снова."
 
     return render(request, 'module1/login.html', {'error_message': error_message})
+
+def logout_view(request):
+    logout(request)
+    return redirect('module1:module1_login')
 
 @login_required(login_url='/module1/login/')
 def dashboard(request):
@@ -46,7 +52,7 @@ def create_request(request):
             new_request = form.save(commit=False)
             new_request.user = request.user
             new_request.save()
-            return redirect('module1_dashboard')
+            return redirect('module1:module1_dashboard')
     else:
         form = RequestForm()
     return render(request, 'module1/create_request.html', {'form': form})
@@ -54,6 +60,6 @@ def create_request(request):
 @login_required(login_url='/module1/login/')
 def admin_panel(request):
     if not request.user.is_superuser:
-        return redirect('module1_login')
+        return redirect('module1:module1_login')
     requests = CleaningRequest.objects.all()
     return render(request, 'module1/admin.html', {'requests': requests})

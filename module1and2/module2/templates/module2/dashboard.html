@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Формирование заявки — Модуль 1{% endblock %}
+{% block title %}Формирование заявки — Модуль 2{% endblock %}
 
 {% block content %}
 <h1>Ваши заявки</h1>
@@ -9,5 +9,5 @@
         <li>{{ req.address }} - {{ req.get_service_type_display }} ({{ req.get_status_display }})</li>
     {% endfor %}
 </ul>
-<a href="{% url 'module2_create_request' %}">Создать заявку</a>
+<a href="{% url 'module2:module2_create_request' %}">Создать заявку</a>
 {% endblock %}
