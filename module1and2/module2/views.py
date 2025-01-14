@@ -19,16 +19,20 @@ def register(request):
     return render(request, 'module2/register.html', {'form': form})
 
 def login_view(request):
-    error_message = None  # Для хранения сообщения об ошибке
+    error_message = None
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+
+        # Попробуем аутентифицировать через оба бэкенда
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('module2_dashboard')
+            next_page = request.GET.get('next', '/module2/dashboard/')
+            return redirect(next_page)
         else:
-            error_message = "Неверный логин или пароль."  # Сообщение об ошибке
+            error_message = "Неверный логин или пароль. Попробуйте снова."
+
     return render(request, 'module2/login.html', {'error_message': error_message})
 
 @login_required(login_url='/module2/login/')
