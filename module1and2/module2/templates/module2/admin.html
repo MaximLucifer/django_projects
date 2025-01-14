@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Админка — Модуль 1{% endblock %}
+
+{% block content %}
+<h1>Панель администратора</h1>
+<ul>
+    {% for req in requests %}
+        <li>{{ req.user.full_name }} - {{ req.service_type }} - {{ req.get_status_display }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

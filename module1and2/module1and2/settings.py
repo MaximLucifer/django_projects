@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -56,8 +57,10 @@ ROOT_URLCONF = 'module1and2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'module1and2/templates',  # Общая папка шаблонов
+        ],
+        'APP_DIRS': True,  # Поиск шаблонов в папках apps/templates
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -71,6 +74,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'module1and2.wsgi.application'
 
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
+
+LOGIN_URL = '/login/'
+
+AUTHENTICATION_BACKENDS = [
+    'module1.auth_backend.Module1AuthBackend',
+    'module2.auth_backend.Module2AuthBackend',
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -83,6 +97,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODELS = 'module1.User'
+AUTH_USER_MODELS = 'module2.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -102,11 +117,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
+
+USE_I18N = True
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 TIME_ZONE = 'UTC'
 

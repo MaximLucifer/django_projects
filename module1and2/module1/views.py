@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import RegistrationForm, RequestForm
-from .models import Request
-
-# Create your views here.
+from .models import CleaningRequest
 
 def register(request):
     if request.method == 'POST':
@@ -12,38 +10,50 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('dashboard')
+            next_page = request.GET.get('next', '/module1/dashboard/')  # если next не указан, перенаправим на default
+            return redirect(next_page)
     else:
         form = RegistrationForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'module1/register.html', {'form': form})
 
 def login_view(request):
+    error_message = None
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '').strip()
+
+        # Попробуем аутентифицировать через оба бэкенда
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
-    return render(request, 'login.html')
+            next_page = request.GET.get('next', '/module1/dashboard/')
+            return redirect(next_page)
+        else:
+            error_message = "Неверный логин или пароль. Попробуйте снова."
 
-@login_required
+    return render(request, 'module1/login.html', {'error_message': error_message})
+
+@login_required(login_url='/module1/login/')
 def dashboard(request):
-    requests = Request.objects.filter(user=request.user)
+    requests = CleaningRequest.objects.filter(user=request.user)
+    return render(request, 'module1/dashboard.html', {'requests': requests})
+
+@login_required(login_url='/module1/login/')
+def create_request(request):
     if request.method == 'POST':
         form = RequestForm(request.POST)
         if form.is_valid():
             new_request = form.save(commit=False)
             new_request.user = request.user
             new_request.save()
-            return redirect('dashboard')
+            return redirect('module1_dashboard')
     else:
         form = RequestForm()
-    return render(request, 'dashboard.html', {'requests': requests, 'form': form })
+    return render(request, 'module1/create_request.html', {'form': form})
 
-@login_required
+@login_required(login_url='/module1/login/')
 def admin_panel(request):
-    if not request.user_is_superuser:
-        return redirect('login.html')
-    requests = Request.objects.all()
-    return render(request, 'admin_panel.html', {'requests': requests})
+    if not request.user.is_superuser:
+        return redirect('module1_login')
+    requests = CleaningRequest.objects.all()
+    return render(request, 'module1/admin.html', {'requests': requests})
