@@ -28,6 +28,11 @@
                         <a href="{% url 'module2:module2_admin_panel' %}?next={{ request.path }}">Админка</a>
                     {% endif %}
                     <a href="/admin/">Админка Django</a>
+                    {% if request.path|slice:":8" == "/module1" %}
+                        <li><a href="{% url 'module1:module1_logout' %}">Выход</a></li>
+                    {% elif request.path|slice:":8" == "/module2" %}
+                        <li><a href="{% url 'module2:module2_logout' %}">Выход</a></li>
+                    {% endif %}
                 {% else %}
                     {% if request.path|slice:":8" == "/module1" %}
                         <a href="{% url 'module1:module1_login' %}?next={{ request.path }}">Логин</a>

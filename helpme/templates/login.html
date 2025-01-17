@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Авторизация</h1>
+    <form method="post">
+        {% if form.non_field_errors %}
+            <div class="error-message">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit'>Войти</button>
+    <form>
+<div>
+{% endblock %}

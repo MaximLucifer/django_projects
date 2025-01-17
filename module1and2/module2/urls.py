@@ -9,4 +9,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='module2_dashboard'),
     path('create_request/', views.create_request, name='module2_create_request'),
     path('admin_panel/', views.admin_panel, name='module2_admin_panel'),
+    path('logout/', views.logout_view, name='module2_logout'),
 ]
