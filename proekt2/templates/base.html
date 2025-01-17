@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Техническая поддержка Help!!!{% endblock %}</title>
+    <link rel='stylesheet' href="{% static "css/style.css" %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                {%if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard' %}">Страница заявок</a></li>
+                    <li><a href="{% url 'admin_panel' %}">Админка</a></li>
+                    <li><a href="/admin/">Админка Django</a></li>
+                    <li><a href="{% url 'logout' %}">Выход</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Логин</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <div class="image-container">
+            <img src="{% static 'images/2.jpg' %}" alt="" />
+            <img src="{% static 'images/3.png' %}" alt="" />
+        </div>
+        {% endblock %}
+    </main>
+    <footer>
+        <p>© 2025 Техническая поддержка Help!!!</p>
+    </footer>
+</body>
+</html>
+</body>
+</html>

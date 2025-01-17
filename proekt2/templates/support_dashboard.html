@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}История заявок{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Ваши заявки</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.id_category.name }} | {{ task.description }} | {{ task.id_status.name }}</li> 
+        {% endfor %}
+    </ul>
+    <div>
+        <a href="{% url 'create_request' %}">Создать заявку</a>
+    </div>
+</div>
+
+{% endblock %}
