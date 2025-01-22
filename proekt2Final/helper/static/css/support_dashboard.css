@@ -1,0 +1,38 @@
+/* History of Requests Styles */
+.dashboard h1 {
+    text-align: center;
+    color: #4CAF50; /* Цвет заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.dashboard ul {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем отступы */
+}
+
+.dashboard ul li {
+    background-color: #fff; /* Цвет фона для элементов списка */
+    border: 1px solid #ddd; /* Граница вокруг элементов списка */
+    padding: 10px; /* Отступы внутри элемента списка */
+    margin-bottom: 10px; /* Отступ между элементами списка */
+    border-radius: 4px; /* Закругленные углы */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+}
+
+.dashboard ul li:hover {
+    background-color: #f0f0f0; /* Цвет фона при наведении */
+}
+
+.dashboard a {
+    display: inline-block; /* Делаем ссылку блочным элементом */
+    margin-top: 20px; /* Отступ сверху */
+    padding: 10px 15px; /* Отступы внутри ссылки */
+    background-color: #4CAF50; /* Цвет фона ссылки */
+    color: white; /* Цвет текста ссылки */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 4px; /* Закругленные углы */
+}
+
+.dashboard a:hover {
+    background-color: #45a049; /* Темнее цвет фона при наведении на ссылку */
+}
