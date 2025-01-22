@@ -40,6 +40,7 @@ class RegistrationForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         user.full_name = self.cleaned_data['full_name']
         user.phone = self.cleaned_data['phone']
+        user.username = self.cleaned_data['email']
         if commit:
             user.save()
         return user
