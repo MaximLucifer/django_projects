@@ -6,10 +6,6 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="text-center mb-4">
-        <img src="{% static 'images/' %}" alt="Логотип" class="img-fluid" width="150px">
-    </div>
-    
     <h1 class="text-center mb-4">Авторизация</h1>
 
     {% if form.non_field_errors %}
@@ -17,7 +13,7 @@
             {{ form.non_field_errors }}
         </div>
     {% endif %}
-    
+
     <form method="post" class="needs-validation" novalidate>
         {% csrf_token %}
         <div class="mb-3">
