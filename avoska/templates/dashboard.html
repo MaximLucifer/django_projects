@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}История заказов{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <img src="{% static 'images/original_540fe20640c088c813c0d21.jpg' %}" alt="Логотип" class="img-fluid" width="150px">
+    </div>
+
+    <div>
+        <h1>Ваши заказы</h1>
+        <ul>
+            {% for order in orders %}
+                <li>{{order.id_product}} | {{order.quantity}} | {{order.delivery_address}} | {{order.id_status.name}} | {{order.order_date}}</li>
+            {% endfor %}
+        </ul>
+        <div>
+            <a href="{% url 'create_request' %}">Сделать заказа</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
