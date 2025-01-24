@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Сделать заказ{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Создание заказа</h1>
+
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        
+        
+        <div class="d-grid">
+            <button type="submit" class="btn btn-success">Создать заказ</button>
+        </div>
+
+        <h2 class="mt-5">Товары</h2>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top img-thumbnail" alt="{{ product.name }}" style="width: 100%; height: 200px; object-fit: contain;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Цена: </strong>{{ product.price }}₽</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Нет доступных товаров.</p>
+        {% endfor %}
+    </div>
+
+    </form>
+</div>
+
+{% endblock %}
