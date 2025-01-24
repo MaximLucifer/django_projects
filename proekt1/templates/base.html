@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Портал клининговых услуг{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                
+                {% if user.is_authenticated %}
+                        <a href="{% url 'dashboard' %}">Страница заявок</a>
+                        <a href="{% url 'admin_panel' %}">Админка</a>
+                        <a href="/admin/">Админка Django</a>
+                        <li><a href="{% url 'logout' %}">Выход</a></li>
+                {% else %}
+                        <a href="{% url 'login' %}">Логин</a>
+                        <a href="{% url 'register' %}">Регистрация</a>  
+                {% endif %}
+                
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2023 Портал клининговых услуг</p>
+    </footer>
+</body>
+</html>
