@@ -36,7 +36,7 @@ def login_view(request):
     return render(request, 'login.html', {'error_message': error_message})
 
 def logout_view(request):
-    logout()
+    logout(request)
     return redirect('login')
 
 @login_required

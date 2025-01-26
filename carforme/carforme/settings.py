@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-from cleaning.cleaning.settings import AUTH_USER_MODEL
-from djdb.djdb.settings import LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL
-from helpme.helpme.settings import AUTHENTICATION_BACKENDS
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

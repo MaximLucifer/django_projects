@@ -1,4 +1,3 @@
-from re import L
 from django.contrib.auth.backends import BaseBackend
 from .models import User
 

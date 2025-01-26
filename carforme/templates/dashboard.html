@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}История бронирований{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <img src="{% static 'images/logo.jpg' %}" alt="Логотип" class="img-fluid" width="150px">
+    </div>
+
+    <div class="table-responsive">
+        <h1>Ваши бронирования</h1>
+        <table class="table table-striped table-borderless">
+            <thead class="table-dark">
+                <tr>
+                    <th>Автомобиль</th>
+                    <th>Статус</th>
+                    <th>Дата бронирования</th>
+                    <th>Комментарий</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.id_car }}</td>
+                        <td>{{ booking.id_status.name }}</td>
+                        <td>{{ booking.booking_date }}</td>
+                        <td>{{ booking.status_comment|default:"Нет комментария" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a href="{% url 'create_request' %}" class="btn btn-primary">Создать бронирование</a>
+    </div>
+</div>
+{% endblock content %}

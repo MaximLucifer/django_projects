@@ -1,7 +1,6 @@
-import email
-from enum import unique
-from wsgiref import validate
-from xml.dom import ValidationErr
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from django.utils.timezone import now
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.utils.translation import gettext_lazy as _
@@ -19,7 +18,7 @@ class RegistrationForm(UserCreationForm):
         required=True
     )
     patronymic = forms.CharField(
-        label=_('Введите фамилию'),
+        label=_('Введите отчество'),
         max_length=50,
         required=True
     )
@@ -31,7 +30,6 @@ class RegistrationForm(UserCreationForm):
     email = forms.EmailField(
         label=_('Введите адрес электронной почты'),
         required=True,
-        unique=True
     )
     drivers_license = forms.CharField(
         label=_('Введите номер вашего водительского удостоверения'),
@@ -56,9 +54,9 @@ class RegistrationForm(UserCreationForm):
         }
     
     def clean_email(self):
-        email = email.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise ValidationErr(_('Этот адрес электронной почты уже используется'))
+        email = self.cleaned_data.get('email')  # Достаем email из cleaned_data
+        if email and User.objects.filter(email=email).exists():
+            raise ValidationError(_('Этот адрес электронной почты уже используется.'))
         return email
     
     def save(self, commit=True):
@@ -82,16 +80,23 @@ class EmailLoginForm(AuthenticationForm):
     
 
 class BookingForm(forms.ModelForm):
+    booking_date = forms.DateField(
+        label="Дата бронирования",
+        required=True,
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+
     class Meta:
         model = Booking
-        fields = ['id_car', 'booking_date','status_comment']
+        fields = ['id_car', 'booking_date', 'status_comment']
         labels = {
-            'id_car': _('Автомобиль'),
-            'booking_date': _('Дата бронирования'),
-            'status_comment': _('Комментарий к состоянию машины')
+            'id_car': 'Автомобиль',
+            'booking_date': 'Дата бронирования',
+            'status_comment': 'Комментарий к бронированию',
         }
-        widgets = {
-            'id_car': forms.Select(),
-            'booking_date': forms.DateInput(attrs={'type': 'date'}),
-            'status_comment': forms.Textarea(attrs={'rows': 4})
-        }
+
+    def clean_booking_date(self):
+        booking_date = self.cleaned_data['booking_date']
+        if booking_date < now().date():
+            raise ValidationError("Дата бронирования не может быть в прошлом.")
+        return booking_date
