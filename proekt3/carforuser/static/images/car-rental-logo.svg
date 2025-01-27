@@ -1,0 +1,21 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="200" fill="#f8f8f8"/>
+  
+  <!-- Car Shape -->
+  <path d="M100 120 L140 120 L160 100 L240 100 L260 120 L300 120 L300 150 L100 150 Z" fill="#2c3e50"/>
+  
+  <!-- Wheels -->
+  <circle cx="140" cy="150" r="20" fill="#34495e"/>
+  <circle cx="260" cy="150" r="20" fill="#34495e"/>
+  <circle cx="140" cy="150" r="10" fill="#95a5a6"/>
+  <circle cx="260" cy="150" r="10" fill="#95a5a6"/>
+  
+  <!-- Text -->
+  <text x="200" y="80" font-family="Arial" font-size="32" font-weight="bold" text-anchor="middle" fill="#e74c3c">
+    Эх, прокачу!
+  </text>
+  
+  <!-- Speed Lines -->
+  <path d="M320 120 L350 120 M325 130 L355 130" stroke="#e74c3c" stroke-width="3" stroke-linecap="round"/>
+</svg>

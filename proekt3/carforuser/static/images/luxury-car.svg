@@ -1,0 +1,20 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="200" fill="#ecf0f1"/>
+  
+  <!-- Car Body -->
+  <path d="M50 120 L100 120 L130 90 L270 90 L300 120 L350 120 C350 120 360 120 360 130 L360 150 C360 160 350 160 350 160 L320 160 C320 180 300 180 300 160 L100 160 C100 180 80 180 80 160 L50 160 C50 160 40 160 40 150 L40 130 C40 120 50 120 50 120 Z" fill="#2c3e50"/>
+  
+  <!-- Windows -->
+  <path d="M130 90 L140 60 L260 60 L270 90" fill="#3498db"/>
+  
+  <!-- Wheels -->
+  <circle cx="100" cy="160" r="25" fill="#34495e"/>
+  <circle cx="300" cy="160" r="25" fill="#34495e"/>
+  <circle cx="100" cy="160" r="15" fill="#95a5a6"/>
+  <circle cx="300" cy="160" r="15" fill="#95a5a6"/>
+  
+  <!-- Headlights -->
+  <ellipse cx="70" cy="120" rx="10" ry="5" fill="#f1c40f"/>
+  <ellipse cx="330" cy="120" rx="10" ry="5" fill="#f1c40f"/>
+</svg>
