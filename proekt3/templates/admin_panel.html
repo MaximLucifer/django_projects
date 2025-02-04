@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Админ панель{% endblock %}
+
+{% block content %}
+<!-- Ссылка на кастомные стили, если необходимо -->
+<link rel='stylesheet' href="{% static 'css/admin_panel.css' %}">
+<div class="container mt-4">
+    <h1 class="text-center">Панель администратора</h1>
+
+    <!-- Отображение сообщений -->
+    {% if messages %}
+        <div class="alert alert-info">
+            <ul class="mb-0">
+                {% for message in messages %}
+                    <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <h2 class="mt-4">Все задачи</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID заявки</th>
+                <th>Марка</th>
+                <th>Модель</th>
+                <th>Статус</th>
+                <th>Изменить статус</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.id_booking }}</td>
+                    <td>{{ booking.id_car.brand }}</td>
+                    <td>{{ booking.id_car.model }}</td>
+                    <td>{{ booking.id_status.name }}</td>
+                    <td>
+                        <!-- Форма изменения статуса -->
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="booking_id" value="{{ booking.id_booking }}">
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Статус</label>
+                                <select name="id_status" id="status" class="form-select">
+                                    {% for status in statuses %}
+                                        <option value="{{ status.id }}" {% if status.id == booking.id_status.id %}selected{% endif %}>
+                                            {{ status.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Обновить статус</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

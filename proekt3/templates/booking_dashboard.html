@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}История заявок{% endblock %}
+
+{% block content %}
+<link rel='stylesheet' href="{% static 'css/images.css' %}">
+<div class='gallery'>
+    <img src="{% static 'images/7.png' %}" alt="" width='450px'/>
+</div>
+<link rel='stylesheet' href="{% static 'css/support_dashboard.css' %}">
+<div class="dashboard">
+    <h1>Ваши заявки</h1>
+    <ul>
+        {% for booking in bookings %}
+            <li>{{ booking.id_booking }} | {{ booking.id_car.brand }} {{booking.id_car.model }} | {{ booking.id_status.name }} | {{ booking.booking_date }}</li> 
+        {% endfor %}
+    </ul>
+    <div>
+        <a href="{% url 'create_request' %}">Создать заявку</a>
+    </div>
+</div>
+
+{% endblock %}
