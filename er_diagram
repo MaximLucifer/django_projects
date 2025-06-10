@@ -1,0 +1,11 @@
+digraph ER {
+	rankdir=LR size=10
+	Client [label="{Client|telegram_id (PK)|full_name|phone}" shape=record]
+	Service [label="{Service|title|description|price|duration}" shape=record]
+	Appointment [label="{Appointment|id (PK)|client_id (FK)|service_id (FK)|date_time|status|comment}" shape=record]
+	ActionLog [label="{ActionLog|id (PK)|user_id (FK)|action|model|timestamp|description}" shape=record]
+	User [label="{User|id (PK)|username|password|role}" shape=record]
+	Appointment -> Client [label=client_id]
+	Appointment -> Service [label=service_id]
+	ActionLog -> User [label=user_id]
+}
